@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 Le Jeu de Binta</title>
+    <title>C'est Ton Mois Binta</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #e74c8c 0%, #a855a8 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -29,17 +29,12 @@
             width: 100%;
             padding: 40px;
             animation: slideUp 0.5s ease-out;
+            text-align: center;
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes bounce {
@@ -47,476 +42,164 @@
             50% { transform: translateY(-20px); }
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #764ba2;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #999;
-            margin-bottom: 20px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
-        }
-
-        .progress-text {
-            text-align: right;
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 25px;
-        }
-
-        .question-section {
-            margin-bottom: 30px;
-        }
-
-        .question-number {
-            font-size: 13px;
-            color: #667eea;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .question-text {
-            font-size: 22px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 25px;
-            line-height: 1.4;
-        }
-
-        .input-area {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #667eea;
-            background: #f8f9ff;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .option {
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 16px;
-            background: white;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .option:hover {
-            border-color: #667eea;
-            background: #f8f9ff;
-            transform: translateY(-2px);
-        }
-
-        .option.selected {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #667eea;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .finish-screen {
-            text-align: center;
-        }
-
-        .finish-emoji {
-            font-size: 60px;
-            margin-bottom: 20px;
-            animation: bounce 0.6s ease-out;
-        }
-
-        .finish-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: #764ba2;
-            margin-bottom: 15px;
-        }
-
-        .finish-message {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .error-message {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 8px;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-            animation: shake 0.3s;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .hidden {
-            display: none;
-        }
+        .treasure-wrapper { text-align: center; margin: 40px 0; }
+        .treasure-button { font-size: 100px; cursor: pointer; animation: pulse 2s infinite; background: none; border: none; padding: 0; }
+        .treasure-button:hover { transform: scale(1.2); }
+        .message { font-size: 24px; font-weight: 700; color: #e74c8c; margin-bottom: 20px; }
+        .subtext { font-size: 16px; color: #666; margin-bottom: 30px; }
+        .photos-container { margin: 30px 0; display: none; animation: slideUp 0.8s ease-out; }
+        .photos-container.show { display: block; }
+        .photos { display: flex; gap: 15px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
+        .photo-frame { border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(231, 76, 140, 0.3); max-width: 180px; height: 200px; }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .start-game-btn { background: linear-gradient(135deg, #e74c8c 0%, #a855a8 100%); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; width: 100%; }
+        .start-game-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(231, 76, 140, 0.4); }
+        .game-container { display: none; }
+        .game-container.show { display: block; }
+        .title { font-size: 28px; font-weight: 700; color: #e74c8c; margin-bottom: 20px; }
+        .progress-bar { width: 100%; height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #e74c8c 0%, #a855a8 100%); transition: width 0.3s ease; }
+        .progress-text { text-align: right; font-size: 12px; color: #999; margin-bottom: 25px; }
+        .question-text { font-size: 22px; font-weight: 600; color: #333; margin-bottom: 25px; line-height: 1.4; }
+        input[type="text"] { width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; box-sizing: border-box; margin-bottom: 15px; }
+        input[type="text"]:focus { outline: none; border-color: #e74c8c; background: #ffe6f0; }
+        .options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .option { padding: 15px; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer; font-size: 16px; background: white; text-align: center; font-weight: 500; }
+        .option:hover { border-color: #e74c8c; background: #ffe6f0; transform: translateY(-2px); }
+        .option.selected { background: linear-gradient(135deg, #e74c8c 0%, #a855a8 100%); color: white; border-color: #e74c8c; }
+        button { width: 100%; padding: 14px; background: linear-gradient(135deg, #e74c8c 0%, #a855a8 100%); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(231, 76, 140, 0.4); }
+        .finish-emoji { font-size: 60px; margin-bottom: 20px; animation: bounce 0.6s ease-out; }
+        .finish-text { font-size: 24px; font-weight: 700; color: #e74c8c; margin-bottom: 15px; }
+        .finish-message { font-size: 16px; color: #666; margin-bottom: 30px; line-height: 1.6; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div class="title">🎮 Le Jeu de Binta</div>
-            <div class="subtitle">Des questions coquines... 😏💋</div>
+        <div id="treasureScreen">
+            <div class="message">🎂 C'est Ton Mois! 🎂</div>
+            <div class="subtext">Je n'ai pas oublié, ma belle Binta 💕</div>
+            <div class="treasure-wrapper">
+                <button class="treasure-button" onclick="revealTreasure()">🎁</button>
+                <div class="subtext" style="margin-top: 20px;">Clique sur le coffre...</div>
+            </div>
+            <div id="photosContainer" class="photos-container">
+                <div class="subtext">Nous deux 💕</div>
+                <div class="photos">
+                    <div class="photo-frame">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAx..." alt="Mahmoud">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAx..." alt="Binta">
+                    </div>
+                </div>
+                <button class="start-game-btn" onclick="startGame()">💕 Commencer le Quiz 💕</button>
+            </div>
         </div>
 
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
+        <div id="gameContainer" class="game-container">
+            <div style="margin-bottom: 40px; text-align: center;">
+                <div class="title">💕 Ton Mois d'Anniversaire</div>
+                <div style="font-size: 16px; color: #999;">Des questions pour 24 ans de toi 🎂</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0/10</div>
+            <div id="gameContent"></div>
         </div>
-        <div class="progress-text" id="progressText">0/12</div>
-
-        <div id="gameContent"></div>
     </div>
 
     <script>
         const questions = [
-            {
-                type: 'text',
-                question: 'Quel est ton prénom ? 😊',
-                placeholder: 'Écris ici...'
-            },
-            {
-                type: 'choice',
-                question: 'Tu as bien dormi cette nuit ? 😴',
-                options: ['Oui, super bien ✨', 'Pas terrible 😴', 'Je pensais trop à toi pour dormir 💭', 'J\'ai rêvé de toi 😋']
-            },
-            {
-                type: 'choice',
-                question: 'Est-ce que tu as pensé à moi ? 💭',
-                options: ['Oui toute la journée 🔥', 'Juste un peu 😏', 'Beaucoup beaucoup 💕', 'Constamment 🫂']
-            },
-            {
-                type: 'choice',
-                question: 'Tu penses que j\'ai plutôt pensé à tes fesses ou à toi ? 😏',
-                options: ['Plutôt à mes fesses 👀', 'À moi en entier 💕', 'Les deux pareil 🔥', 'Surtout à embrasser ma bouche 💋']
-            },
-            {
-                type: 'choice',
-                question: 'Tu préfères que je touche tes fesses matin ou le soir ? 👋',
-                options: ['Le matin pour bien commencer 😏', 'Le soir quand on est au lit 🌙', 'Les deux ! 🔥', 'À chaque fois que tu as envie ']
-            },
-            {
-                type: 'choice',
-                question: 'Est-ce que j\'aurais le droit de téter tes seins ? 👼',
-                options: ['Oui, bien sûr 😘', 'Oui, toute la nuit 🌙', 'Uniquement si tu es gentil 😏', 'C\'est un oui total 🔥']
-            },
-            {
-                type: 'choice',
-                question: 'Qu\'est-ce que tu aimes le plus chez moi physiquement ? 💪',
-                options: ['Tes yeux ✨', 'Ton sourire 😊', 'Ton corps 🔥', 'Tout chez toi 😍']
-            },
-            {
-                type: 'choice',
-                question: 'Comment tu décrirais notre chimie ? ⚡',
-                options: ['Explosive 🔥', 'Douce et sensuelle 💕', 'Parfaite ✨', 'Addictive 🌶️']
-            },
-            {
-                type: 'text',
-                question: 'Quel est le moment le plus sensuel qu\'on a partagé ? 🌹',
-                placeholder: 'Écris ta réponse...'
-            },
-            {
-                type: 'choice',
-                question: 'Tu me préfères plutôt... ? 😊',
-                options: ['Tendre et doux 🤍', 'Passionné et intense 🔥', 'Joueur et amusant 😜', 'Un mélange de tout 💯']
-            },
-            {
-                type: 'text',
-                question: 'Quel est ton fantasme secret avec moi ? 😏',
-                placeholder: 'Sois honnête...'
-            },
-            {
-                type: 'text',
-                question: 'Qu\'est-ce que tu voudrais qu\'on essaie ensemble ? 🎯',
-                placeholder: 'Écris ta réponse...'
-            }
+            { type: "text", question: "Quel est ton prénom ? 😊", placeholder: "Écris ici..." },
+            { type: "choice", question: "Où tu vois notre maison au bord de l'eau dans 5 ans ? 🏠", options: ["Guinée 🌍", "France 🇫🇷", "Ailleurs en Afrique 🌴", "On s'en fout, tant qu'on est ensemble 💕"] },
+            { type: "choice", question: "Quelle pièce de la maison te rend la plus heureuse ? 🏡", options: ["La chambre pour nous deux 🛏️", "La terrasse au bord de l'eau 🌊", "La cuisine pour préparer ensemble 🍳", "Le salon pour regarder la pluie 🌧️"] },
+            { type: "text", question: "Quel est ton rêve le plus fou pour nous deux ? ✨", placeholder: "Écris ta réponse..." },
+            { type: "choice", question: "Comment tu imagines nos nuits sous la pluie ? 🌧️💕", options: ["Enlacés en écoutant la pluie", "En regardant les gouttes tomber", "Passionnément près de la fenêtre 🔥", "Endormis en sentant l'amour"] },
+            { type: "choice", question: "Qu'est-ce qui te rend le plus heureuse avec moi ? 😍", options: ["Ton amour 💕", "Tes caresses 🤍", "Tes paroles douces 💬", "Tout ce que tu fais"] },
+            { type: "text", question: "Comment tu vois notre futur... enfants, mariage, rêves ? 👨‍👩‍👧", placeholder: "Sois honnête..." },
+            { type: "choice", question: "Qu'est-ce que tu voudrais qu'on construise ensemble ? 🏗️", options: ["Une belle famille 👨‍👩‍👧‍👦", "Un empire économique 💼", "Une vie simple mais heureuse 🤍", "Tous les rêves possibles 🌟"] },
+            { type: "text", question: "Quel est le moment que tu veux revivre avec moi pour l'éternité ? 🌙", placeholder: "Écris ta réponse..." },
+            { type: "text", question: "Pourquoi m'aimes-tu ? (sois coquine 😏)", placeholder: "Dis-moi tout..." }
         ];
 
         let currentQuestion = 0;
         const answers = [];
+        let selectedOption = null;
+
+        function revealTreasure() { document.getElementById("photosContainer").classList.add("show"); }
+        function startGame() { document.getElementById("treasureScreen").style.display = "none"; document.getElementById("gameContainer").classList.add("show"); renderQuestion(); }
 
         function renderQuestion() {
-            const container = document.getElementById('gameContent');
+            const container = document.getElementById("gameContent");
             const q = questions[currentQuestion];
             const progress = currentQuestion + 1;
             const total = questions.length;
-
             const percentage = (progress / total) * 100;
-            document.getElementById('progressFill').style.width = percentage + '%';
-            document.getElementById('progressText').textContent = `${progress}/${total}`;
+            document.getElementById("progressFill").style.width = percentage + "%";
+            document.getElementById("progressText").textContent = progress + "/" + total;
 
-            if (currentQuestion < questions.length) {
-                let html = `
-                    <div class="question-section">
-                        <div class="question-number">Question ${progress}/${total}</div>
-                        <div class="question-text">${q.question}</div>
-                `;
-
-                if (q.type === 'text') {
-                    html += `
-                        <div class="input-area">
-                            <input type="text" id="answerInput" placeholder="${q.placeholder}" autofocus>
-                        </div>
-                        <div class="error-message" id="errorMsg">Écris quelque chose d'abord ! 😊</div>
-                        <button onclick="handleTextAnswer()">Suivant →</button>
-                    `;
-                } else if (q.type === 'choice') {
-                    html += '<div class="options">';
-                    q.options.forEach((option, index) => {
-                        html += `<div class="option" onclick="selectOption(${index})">${option}</div>`;
-                    });
-                    html += '</div><button onclick="handleChoiceAnswer()" style="margin-top: 20px;">Suivant →</button>';
-                }
-
-                html += '</div>';
-                container.innerHTML = html;
-
-                if (q.type === 'text') {
-                    document.getElementById('answerInput').focus();
-                    document.getElementById('answerInput').addEventListener('keypress', (e) => {
-                        if (e.key === 'Enter') handleTextAnswer();
-                    });
-                }
+            let html = "<div style='margin-bottom: 30px;'><div style='font-size: 22px; font-weight: 600; color: #333; margin-bottom: 25px;'>" + q.question + "</div>";
+            if (q.type === "text") {
+                html += "<input type='text' id='answerInput' placeholder='" + q.placeholder + "' autofocus><button onclick='handleTextAnswer()'>Suivant →</button>";
+            } else {
+                html += "<div class='options'>";
+                q.options.forEach((option, index) => { html += "<div class='option' onclick='selectOption(" + index + ")'>" + option + "</div>"; });
+                html += "</div><button onclick='handleChoiceAnswer()'>Suivant →</button>";
             }
+            html += "</div>";
+            container.innerHTML = html;
+            if (q.type === "text") { setTimeout(() => { const input = document.getElementById("answerInput"); if (input) input.focus(); }, 100); }
         }
-
-        let selectedOption = null;
 
         function selectOption(index) {
             selectedOption = index;
-            document.querySelectorAll('.option').forEach((opt, i) => {
-                opt.classList.toggle('selected', i === index);
-            });
+            document.querySelectorAll(".option").forEach((opt, i) => { if (i === index) opt.classList.add("selected"); else opt.classList.remove("selected"); });
         }
 
         function handleTextAnswer() {
-            const input = document.getElementById('answerInput');
-            const errorMsg = document.getElementById('errorMsg');
-
-            if (input.value.trim() === '') {
-                errorMsg.classList.add('show');
-                return;
-            }
-
+            const input = document.getElementById("answerInput");
+            if (!input || input.value.trim() === "") { alert("Écris quelque chose ! 😊"); return; }
             answers.push(input.value.trim());
             currentQuestion++;
-
-            if (currentQuestion < questions.length) {
-                renderQuestion();
-            } else {
-                showFinish();
-            }
+            selectedOption = null;
+            if (currentQuestion < questions.length) renderQuestion();
+            else showFinish();
         }
 
         function handleChoiceAnswer() {
-            if (selectedOption === null) {
-                alert('Sélectionne une réponse ! 😊');
-                return;
-            }
-
+            if (selectedOption === null) { alert("Sélectionne une réponse ! 😊"); return; }
             answers.push(questions[currentQuestion].options[selectedOption]);
-            selectedOption = null;
             currentQuestion++;
-
-            if (currentQuestion < questions.length) {
-                renderQuestion();
-            } else {
-                showFinish();
-            }
+            selectedOption = null;
+            if (currentQuestion < questions.length) renderQuestion();
+            else showFinish();
         }
 
         function showFinish() {
-            const container = document.getElementById('gameContent');
+            const container = document.getElementById("gameContent");
             const bintaName = answers[0];
-
-            let answersHTML = '<div style="background: #f8f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;">';
-            
+            let answersHTML = "<div style='background: #ffe6f0; padding: 20px; border-radius: 12px; margin-bottom: 20px;'>";
             questions.forEach((q, index) => {
-                answersHTML += `
-                    <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0;">
-                        <div style="font-weight: 600; color: #667eea; font-size: 14px;">Question ${index + 1}</div>
-                        <div style="color: #333; margin: 5px 0; font-size: 14px;">${q.question}</div>
-                        <div style="color: #764ba2; font-weight: 600; font-size: 15px;">→ ${answers[index]}</div>
-                    </div>
-                `;
+                answersHTML += "<div style='margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #ffccdd;'>";
+                answersHTML += "<div style='font-weight: 600; color: #e74c8c; font-size: 14px;'>Q" + (index + 1) + ": " + q.question + "</div>";
+                answersHTML += "<div style='color: #a855a8; font-weight: 600; margin-top: 5px;'>→ " + answers[index] + "</div>";
+                answersHTML += "</div>";
             });
-            
-            answersHTML += '</div>';
-
-            const poeme = `
-            Tu sais, ${bintaName}... 💭
-            
-            Tes yeux qui me regardent,
-            Tes lèvres qui m'appelent,
-            Et ce corps que j'aime caresser...
-            
-            Chaque courbe, chaque soupir,
-            Chaque moment passé ensemble
-            Me rend fou de toi.
-            
-            Tes fesses dans mes mains,
-            Ton souffle sur ma peau,
-            Tes seins contre mon cœur qui s'accélère...
-            
-            Quand je te regarde,
-            Je ne vois pas juste une fille,
-            Je vois MA fille.
-            
-            Celle qui me fait rêver,
-            Celle qui me fait vivre,
-            Celle que je veux dans mon lit chaque nuit.
-            
-            Et si tu as pensé à moi aujourd'hui,
-            Sache que moi aussi je ne pense qu'à toi.
-            À tes lèvres, à tes courbes,
-            À tout ce qu'on va se faire...
-            
-            À très vite, mon amour. 💕🔥
-            `;
-
-            container.innerHTML = `
-                <div class="finish-screen">
-                    <div class="finish-emoji">🔥</div>
-                    <div class="finish-text">C'est terminé !</div>
-                    <div class="finish-message">
-                        Wow, ${bintaName}... tes réponses sont tellement... 🔥<br><br>
-                        Tu m'as donné tellement à penser... Tu me manques déjà. 😘<br><br>
-                        À bientôt pour vérifier tout ça en vrai... 💕
-                    </div>
-                    
-                    <div style="margin: 30px 0; text-align: left;">
-                        <div style="font-size: 14px; color: #666; margin-bottom: 10px; font-weight: 600;">📋 Résumé de tes réponses :</div>
-                        ${answersHTML}
-                    </div>
-                    
-                    <div style="text-align: center; margin: 30px 0;">
-                        <button onclick="revealTreasure()" style="
-                            background: linear-gradient(135deg, #d4a574 0%, #8b6914 100%);
-                            font-size: 40px;
-                            border: none;
-                            padding: 20px 30px;
-                            border-radius: 12px;
-                            cursor: pointer;
-                            transition: transform 0.3s;
-                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                            🎁 Découvre ma surprise
-                        </button>
-                        <div id="treasureBox" style="display: none; margin-top: 20px; background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%); padding: 20px; border-radius: 12px; border: 3px solid #d4a574;">
-                            <div style="font-size: 14px; color: #333; white-space: pre-wrap; line-height: 1.8; font-style: italic;">
-                                ${poeme}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="copyAnswers()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-bottom: 10px;">📋 Copier les réponses</button>
-                    <button onclick="location.reload()">🔄 Rejouer</button>
-                </div>
-            `;
+            answersHTML += "</div>";
+            let finishHTML = "<div style='text-align: center;'><div class='finish-emoji'>🎂💕</div>";
+            finishHTML += "<div class='finish-text'>C'est Ton Mois, " + bintaName + "!</div>";
+            finishHTML += "<div class='finish-message'>Je n'ai pas oublié... 💕<br><br>Tu vas avoir 24 ans et tu mérites toute ma passion... 🔥<br><br>Je t'aime plus que tu ne le sauras jamais. 💕</div>";
+            finishHTML += "<div style='margin: 30px 0; text-align: left;'>" + answersHTML + "</div>";
+            finishHTML += "<button onclick='location.reload()'>🔄 Recommencer</button></div>";
+            container.innerHTML = finishHTML;
         }
-
-        function revealTreasure() {
-            const treasureBox = document.getElementById('treasureBox');
-            if (treasureBox.style.display === 'none') {
-                treasureBox.style.display = 'block';
-                treasureBox.style.animation = 'slideUp 0.5s ease-out';
-            } else {
-                treasureBox.style.display = 'none';
-            }
-        }
-
-        function copyAnswers() {
-            let text = `🎮 LE JEU DE BINTA\n\n`;
-            questions.forEach((q, index) => {
-                text += `Q${index + 1}: ${q.question}\nRéponse: ${answers[index]}\n\n`;
-            });
-            
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ Réponses copiées ! Tu peux les coller n\'importe où 😊');
-            }).catch(() => {
-                alert('Prends une capture d\'écran 📸');
-            });
-        }
-
-        renderQuestion();
     </script>
 </body>
 </html>
